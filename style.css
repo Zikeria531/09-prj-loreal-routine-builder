@@ -50,6 +50,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   background-color: white;
+  color: #000;
   font-weight: 500;
 }
 
@@ -79,6 +80,28 @@ body {
   overflow-y: auto;
   background: #fafafa;
   margin-bottom: 20px;
+}
+
+.chat-message {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+
+.chat-message.user {
+  background: #ededed;
+}
+
+.chat-message.assistant {
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.chat-message.error {
+  color: #8b0000;
+  background: #fff4f4;
+  border: 1px solid #d99;
 }
 
 /* placeholder message */
@@ -127,7 +150,7 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: #ff003b;
 }
 
 .chat-form button:focus {
@@ -178,14 +201,40 @@ body {
   margin: 30px 0;
 }
 
-.product-card {
+.product-item {
   flex: 0 1 calc(33.333% - 14px);
+  min-width: 0;
+}
+
+.product-card {
+  width: 100%;
   border: 1px solid #ccc;
   padding: 15px;
   border-radius: 4px;
   display: flex;
   gap: 15px;
   min-height: 160px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.product-card:hover,
+.product-card:focus-visible {
+  border-color: #666;
+}
+
+.product-card:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.product-card.selected {
+  border: 2px solid #ff003b;
+  background-color: #f5f5f5;
 }
 
 .product-card img {
@@ -213,6 +262,22 @@ body {
   color: #666;
 }
 
+.product-description {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.product-description summary {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.product-description p {
+  margin-top: 8px;
+  color: #555;
+}
+
 /* selected products */
 .selected-products {
   margin: 40px 0;
@@ -232,6 +297,54 @@ body {
   gap: 10px;
 }
 
+.selected-product {
+  padding: 10px 12px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.selected-product:hover,
+.selected-product:focus-visible {
+  border-color: #000;
+  background: #f5f5f5;
+}
+
+.selected-product:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.clear-selection-btn {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font: inherit;
+  cursor: pointer;
+}
+
+.clear-selection-btn:hover:not(:disabled),
+.clear-selection-btn:focus-visible {
+  border-color: #000;
+  background: #f5f5f5;
+}
+
+.clear-selection-btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.clear-selection-btn:disabled {
+  color: #777;
+  cursor: not-allowed;
+}
+
 .generate-btn {
   width: 100%;
   margin-top: 20px;
@@ -247,7 +360,13 @@ body {
 }
 
 .generate-btn:hover {
+  background: #ff003b;
+}
+
+.generate-btn:disabled,
+.chat-form button:disabled {
   background: #666;
+  cursor: wait;
 }
 
 .generate-btn i {
